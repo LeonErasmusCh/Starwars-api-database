@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User
+from models import db, User, Favourites, People, Planet, Vehicles
 #from models import Person
 
 app = Flask(__name__)
@@ -32,12 +32,50 @@ def sitemap():
 
 @app.route('/user', methods=['GET'])
 def handle_hello():
+    all_users = User.query.all()
+    all_users = list(map(lambda x: x.serialize(), all_users))
+    return jsonify(all_users), 200
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
 
-    return jsonify(response_body), 200
+#ruta que mostrara todos mis FAVOURITES
+@app.route('/favourites', methods=['GET'])
+def allFavouritos():
+    all_favoutites = Favourites.query.all()
+    all_favoutites = list(map(lambda x: x.serialize(), all_favoutites))
+    return jsonify(all_favourites)    
+
+
+#ruta que mostrara todos mis PEOPLE
+@app.route('/people', methods=['GET'])
+def allPeople():
+    all_people = Planets.query.all()
+    all_people = list(map(lambda x: x.serialize(), all_people))
+    return jsonify(all_people)   
+
+
+#ruta que mostrara todos mis PLANTES
+@app.route('/planets', methods=['GET'])
+def allPlanets():
+    all_planets = Planet.query.all()
+    all_planet = list(map(lambda x: x.serialize(), all_planet))
+    return jsonify(all_people)   
+
+
+
+#ruta que mostrara todos mis VEHICLES
+@app.route('/vehicles', methods=['GET'])
+def allVehicles():
+    all_vehicles = Vehicle.query.all()
+    all_vehicles = list(map(lambda x: x.serialize(), all_vehicles))
+    return jsonify(all_vehicles) 
+
+
+
+
+
+
+
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
