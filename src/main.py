@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User, Favourites, People, Planet, Vehicles
+from models import db, User, Favourites, People, Planets, Vehicles
 #from models import Person
 
 app = Flask(__name__)
@@ -56,16 +56,16 @@ def allPeople():
 #ruta que mostrara todos mis PLANTES
 @app.route('/planets', methods=['GET'])
 def allPlanets():
-    all_planets = Planet.query.all()
-    all_planet = list(map(lambda x: x.serialize(), all_planet))
-    return jsonify(all_people)   
+    all_planets = Planets.query.all()
+    all_planets = list(map(lambda x: x.serialize(), all_planets))
+    return jsonify(all_planets)   
 
 
 
 #ruta que mostrara todos mis VEHICLES
 @app.route('/vehicles', methods=['GET'])
 def allVehicles():
-    all_vehicles = Vehicle.query.all()
+    all_vehicles = Vehicles.query.all()
     all_vehicles = list(map(lambda x: x.serialize(), all_vehicles))
     return jsonify(all_vehicles) 
 
