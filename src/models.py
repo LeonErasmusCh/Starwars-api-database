@@ -10,7 +10,7 @@ class User(db.Model):
     
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.id
 
     def serialize(self):
         return {
@@ -40,9 +40,9 @@ class Favourites(db.Model):
 class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique= True, nullable=False)
-    homeworld = db.Column(db.String(30), unique= False, nullable=False)#FK
+    homeworld = db.Column(db.String(30), unique= False, nullable=False)
     age = db.Column(db.Integer)
-    vehicle = db.Column(db.String(30), unique= False, nullable=False)#FK
+    vehicle = db.Column(db.String(30), unique= False, nullable=False)
 
     def serialize(self):
         return {
