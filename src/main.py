@@ -39,16 +39,34 @@ def handle_hello():
 
 #ruta que mostrara todos mis FAVOURITES
 @app.route('/favourites', methods=['GET'])
-def allFavouritos():
+def allFavourites():
     all_favoutites = Favourites.query.all()
-    all_favoutites = list(map(lambda x: x.serialize(), all_favoutites))
+    all_favoutites = list(map(lambda x: x.serialize(), all_favourites))
     return jsonify(all_favourites)    
+
+@app.route('/user/favourites', methods=['GET'])
+def allUserFavourites():
+    all_user_favoutites = Favourites.query.all()
+    all_user_favoutites = list(map(lambda x: x.serialize(), all_user_favoutites))
+    return jsonify(all_user_favoutites)    
+
+@app.route('/user/favourites<int:position>', methods=['POST'])
+def PostFavourites():
+    all_user_favoutites = Favourites.query.all()
+    all_user_favoutites = list(map(lambda x: x.serialize(), all_user_favoutites))
+    return jsonify(all_user_favoutites)    
+
+@app.route('/user/favourites<int:position>', methods=['DELETE'])
+def DeleteFavourites():
+    delete_user_favoutites = Favourites.query.all()
+    delete_user_favoutites = list(map(lambda x: x.serialize(), delete_user_favoutites))
+    return jsonify(delete_user_favoutites)    
 
 
 #ruta que mostrara todos mis PEOPLE
 @app.route('/people', methods=['GET'])
 def allPeople():
-    all_people = Planets.query.all()
+    all_people = People.query.all()
     all_people = list(map(lambda x: x.serialize(), all_people))
     return jsonify(all_people)   
 
